@@ -29,7 +29,7 @@ namespace OpenRiotAPI.Endpoints.AccountEndpoint
 
         public AccountDto GetMyAccount()
         {
-
+            throw new NotImplementedException();
         }
     }
 }

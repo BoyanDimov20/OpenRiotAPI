@@ -3,16 +3,12 @@ using OpenRiotAPI.Endpoints.SummonerEndpoint.Dtos;
 
 namespace OpenRiotAPI.Endpoints.SummonerEndpoint
 {
-    internal interface ISummonerEndpoint
+    public interface ISummonerEndpoint
     {
-        SummonerDto GetSummonerByAccountId(string accountId, Region region);
-
-        SummonerDto GetSummonerByName(string summonerName, Region region);
-
-        SummonerDto GetSummonerByPuuid(string puuid, Region region);
-
-        SummonerDto GetSummonerById(string summonerId, Region region);
-
-        SummonerDto GetMySummoner(Region region);
+        Task<RiotResponse<SummonerDto>> GetSummonerByAccountId(string accountId, Region region);
+        Task<RiotResponse<SummonerDto>> GetSummonerByName(string summonerName, Region region);
+        Task<RiotResponse<SummonerDto>> GetSummonerByPuuid(string puuid, Region region);
+        Task<RiotResponse<SummonerDto>> GetSummonerById(string summonerId, Region region);
+        Task<RiotResponse<SummonerDto>> GetMySummoner(Region region);
     }
 }

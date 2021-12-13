@@ -1,6 +1,6 @@
 ﻿namespace OpenRiotAPI.Endpoints.SummonerEndpoint.Dtos
 {
-    internal class SummonerDto
+    public class SummonerDto
     {
         public string AccountId { get; set; }
 
