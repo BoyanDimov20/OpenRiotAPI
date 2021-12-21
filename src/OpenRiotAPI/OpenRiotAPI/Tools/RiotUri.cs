@@ -22,6 +22,17 @@ namespace OpenRiotAPI.Tools
             return sb.ToString().TrimEnd();
         }
 
+        public static string CreateUrl(LongRegion region, string endpoint, params string[] pathParams)
+        {
+            var sb = new StringBuilder(String.Format(RiotHost, region.ToString().ToLower(), endpoint));
+            foreach (var item in pathParams)
+            {
+                sb.Append($"/{item}");
+            }
+
+            return sb.ToString().TrimEnd();
+        }
+
         private static string Parse(Region region)
         {
             switch (region)
