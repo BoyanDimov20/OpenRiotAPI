@@ -4,30 +4,38 @@ using OpenRiotAPI.Tools;
 
 namespace OpenRiotAPI.Endpoints.SummonerEndpoint
 {
-    internal class SummonerEndpoint : ISummonerEndpoint
+    internal class SummonerEndpoint : EndpointBase, ISummonerEndpoint
     {
-        private readonly HttpRequester httpRequester;
-
         private const string MySummonerUrl = "lol/summoner/v4/summoners/me";
         private const string SummonerByAccountId = "lol/summoner/v4/summoners/by-account";
         private const string SummonerBySummonerId = "lol/summoner/v4/summoners";
         private const string SummonerByPuuid = "lol/summoner/v4/summoners/by-puuid";
 
-        public SummonerEndpoint(HttpClient httpClient)
+        public SummonerEndpoint(HttpClient httpClient) : base(httpClient)
         {
-            this.httpRequester = new HttpRequester(httpClient);
         }
 
-        public async Task<RiotResponse<SummonerDto>> GetMySummoner(Region region)
+        public Task<RiotResponse<SummonerDto>> GetMySummoner(Region region, string accessToken = null)
         {
-            throw new NotImplementedException();
+            if (accessToken != null)
+            {
+                using HttpClient httpClient = new HttpClient();
+                httpClient.DefaultRequestHeaders.Add("Authorization", accessToken);
+
+                var endpoint = new SummonerEndpoint(httpClient);
+                return endpoint.GetMySummoner(region);
+            }
+
+            var url = $"{RiotUri.CreateUrl(region, MySummonerUrl)}";
+
+            return this.httpRequester.GetAsync<SummonerDto>(url);
         }
 
-        public async Task<RiotResponse<SummonerDto>> GetSummonerByAccountId(string accountId, Region region)
+        public Task<RiotResponse<SummonerDto>> GetSummonerByAccountId(string accountId, Region region)
         {
             var url = $"{RiotUri.CreateUrl(region, SummonerByAccountId)}/{accountId}";
 
-            return await this.httpRequester.GetAsync<SummonerDto>(url);
+            return this.httpRequester.GetAsync<SummonerDto>(url);
         }
 
         public Task<RiotResponse<SummonerDto>> GetSummonerById(string summonerId, Region region)
