@@ -7,8 +7,9 @@ namespace OpenRiotAPI.Endpoints.SpectatorEndpoint
 {
     public class SpectatorEndpoint : EndpointBase, ISpectatorEndpoint
     {
-        private const string ActiveGameBySummonerUrl = "lol/spectator/v4/active-games/by-summoner";
+        private const string ActiveGameBySummonerUrl = "lol/spectator/v4/active-games/by-summoner/{0}";
         private const string FeaturedGamesUrl = "lol/spectator/v4/featured-games";
+        private const string SummonerByName = "lol/summoner/v4/summoners/by-name/{0}";
 
         public SpectatorEndpoint(HttpClient httpClient) : base(httpClient)
         {
@@ -16,7 +17,7 @@ namespace OpenRiotAPI.Endpoints.SpectatorEndpoint
 
         public async Task<RiotResponse<CurrentGame>> GetActiveGameBySummonerName(string summonerName, Region region)
         {
-            var summoner = await this.httpRequester.GetAsync<SummonerDto>(RiotUri.CreateUrl(region, GlobalConstants.SummonerByNameUrl, summonerName));
+            var summoner = await this.httpRequester.GetAsync<SummonerDto>(RiotUri.CreateUrl(region, SummonerByName, summonerName));
             if (!summoner.IsSucessful)
             {
                 return new RiotResponse<CurrentGame>

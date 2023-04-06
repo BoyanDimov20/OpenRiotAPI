@@ -1,15 +1,16 @@
-﻿using OpenRiotAPI.Endpoints.AccountEndpoint.Dtos;
+﻿using OpenRiotAPI.Common;
+using OpenRiotAPI.Endpoints.AccountEndpoint.Dtos;
 
 namespace OpenRiotAPI.Endpoints.AccountEndpoint
 {
     internal interface IAccountEndpoint
     {
-        AccountDto GetAccountByPuuid(string puuid);
+        Task<RiotResponse<AccountDto>> GetAccountByPuuid(string puuid, LongRegion region);
 
-        AccountDto GetAccountByRiotId(string tagLine, string gameName);
+        Task<RiotResponse<AccountDto>> GetAccountByRiotId(string tagLine, string gameName, LongRegion region);
 
-        AccountDto GetActiveShards(string game, string puuid);
+        Task<RiotResponse<AccountDto>> GetActiveShards(string game, string puuid, LongRegion region);
 
-        AccountDto GetMyAccount();
+        Task<RiotResponse<AccountDto>> GetMyAccount(string authorization, LongRegion region);
     }
 }

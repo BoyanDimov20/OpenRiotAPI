@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OpenRiotAPI.Endpoints.AccountEndpoint.Dtos
+﻿namespace OpenRiotAPI.Endpoints.AccountEndpoint.Dtos
 {
-    internal class AccountDto
+    public class AccountDto
     {
+        public string Puuid { get; set; }
+        public string GameName { get; set; }
+        public string TagLine { get; set; }
     }
 }

@@ -13,22 +13,17 @@ namespace OpenRiotAPI.Tools
 
         public static string CreateUrl(Region region, string endpoint, params string[] pathParams)
         {
-            var sb = new StringBuilder(String.Format(RiotHost, RiotUri.Parse(region), endpoint));
-            foreach (var item in pathParams)
-            {
-                sb.Append($"/{item}");
-            }
+            var endpointWithParams = String.Format(endpoint, pathParams);
+            var sb = new StringBuilder(String.Format(RiotHost, RiotUri.Parse(region), endpointWithParams));
+           
 
             return sb.ToString().TrimEnd();
         }
 
         public static string CreateUrl(LongRegion region, string endpoint, params string[] pathParams)
         {
-            var sb = new StringBuilder(String.Format(RiotHost, region.ToString().ToLower(), endpoint));
-            foreach (var item in pathParams)
-            {
-                sb.Append($"/{item}");
-            }
+            var endpointWithParams = String.Format(endpoint, pathParams);
+            var sb = new StringBuilder(String.Format(RiotHost, region.ToString().ToLower(), endpointWithParams));
 
             return sb.ToString().TrimEnd();
         }
