@@ -3,7 +3,7 @@ using OpenRiotAPI.Endpoints.AccountEndpoint.Dtos;
 
 namespace OpenRiotAPI.Endpoints.AccountEndpoint
 {
-    internal interface IAccountEndpoint
+    public interface IAccountEndpoint
     {
         Task<RiotResponse<AccountDto>> GetAccountByPuuid(string puuid, LongRegion region);
 
