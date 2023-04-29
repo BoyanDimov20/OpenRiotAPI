@@ -5,7 +5,7 @@ namespace OpenRiotAPI.Endpoints.MatchEndpoint.Dtos
 {
     public class TeamInfo
     {
-        public BannedChampion Bans { get; set; }
+        public Ban[] Bans { get; set; }
 
         public int TeamId { get; set; }
 

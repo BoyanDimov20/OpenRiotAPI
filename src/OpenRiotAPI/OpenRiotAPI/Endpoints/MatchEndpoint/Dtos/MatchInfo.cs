@@ -1,35 +1,52 @@
-﻿namespace OpenRiotAPI.Endpoints.MatchEndpoint.Dtos
+﻿using Newtonsoft.Json;
+
+namespace OpenRiotAPI.Endpoints.MatchEndpoint.Dtos
 {
     public class MatchInfo
     {
+        [JsonProperty("gameCreation")]
         public long GameCreation { get; set; }
 
+        [JsonProperty("gameDuration")]
         public long GameDuration { get; set; }
 
+        [JsonProperty("gameEndTimestamp")]
         public long GameEndTimestamp { get; set; }
 
+        [JsonProperty("gameId")]
         public long GameId { get; set; }
 
+        [JsonProperty("gameMode")]
         public string GameMode { get; set; }
 
+        [JsonProperty("gameName")]
         public string GameName { get; set; }
 
+        [JsonProperty("gameStartTimestamp")]
         public long GameStartTimestamp { get; set; }
 
+        [JsonProperty("gameType")]
         public string GameType { get; set; }
 
+        [JsonProperty("gameVersion")]
         public string GameVersion { get; set; }
 
-        public int MapId { get; set; }
+        [JsonProperty("mapId")]
+        public long MapId { get; set; }
 
-        public IList<Participant> Participants { get; set; } // TODO: Participants
+        [JsonProperty("participants")]
+        public Participant[] Participants { get; set; }
 
+        [JsonProperty("platformId")]
         public string PlatformId { get; set; }
 
-        public int QueueId { get; set; }
+        [JsonProperty("queueId")]
+        public long QueueId { get; set; }
 
-        //public IList<object> Teams { get; set; } // TODO: Teams
+        [JsonProperty("teams")]
+        public TeamInfo[] Teams { get; set; }
 
+        [JsonProperty("tournamentCode")]
         public string TournamentCode { get; set; }
 
     }
