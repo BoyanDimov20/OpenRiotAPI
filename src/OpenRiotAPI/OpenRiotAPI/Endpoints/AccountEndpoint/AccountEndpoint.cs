@@ -33,7 +33,7 @@ namespace OpenRiotAPI.Endpoints.AccountEndpoint
 
         public Task<RiotResponse<AccountDto>> GetActiveShards(string game, string puuid, LongRegion region)
         {
-            var url = RiotUri.CreateUrl(region, AccountByRiotId, game, puuid);
+            var url = RiotUri.CreateUrl(region, ActiveShardsByGame, game, puuid);
             return this.httpRequester.GetAsync<AccountDto>(url);
         }
 

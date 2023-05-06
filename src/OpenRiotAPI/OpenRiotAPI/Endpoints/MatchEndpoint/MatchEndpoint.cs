@@ -8,7 +8,7 @@ namespace OpenRiotAPI.Endpoints.MatchEndpoint
     {
         private const string MatchByIdUrl = "lol/match/v5/matches/{0}";
         private const string MatchByPuuidUrl = "lol/match/v5/matches/by-puuid/{0}/ids";
-        private const string MatchTimelineByMatchIdUrl = "/lol/match/v5/matches/{0}/timeline";
+        private const string MatchTimelineByMatchIdUrl = "lol/match/v5/matches/{0}/timeline";
 
         public MatchEndpoint(HttpClient httpClient) : base(httpClient)
         {
@@ -24,10 +24,10 @@ namespace OpenRiotAPI.Endpoints.MatchEndpoint
             return this.httpRequester.GetAsync<List<string>>(RiotUri.CreateUrl(region, MatchByPuuidUrl, puuid));
         }
 
-        public object GetMatchTimeline(string matchId)
+        public Task<RiotResponse<string>> GetMatchTimeline(LongRegion region, string matchId)
         {
-            //TODO: Implement
-            throw new NotImplementedException();
+            var url = RiotUri.CreateUrl(region, MatchTimelineByMatchIdUrl, matchId);
+            return this.httpRequester.GetAsStringAsync(url);
         }
     }
 }
