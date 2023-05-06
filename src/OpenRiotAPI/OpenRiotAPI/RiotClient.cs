@@ -1,9 +1,12 @@
-﻿using OpenRiotAPI.Endpoints.AccountEndpoint;
+﻿using Microsoft.Extensions.Options;
+using OpenRiotAPI.Endpoints.AccountEndpoint;
+using OpenRiotAPI.Endpoints.ChampionEndpoint;
 using OpenRiotAPI.Endpoints.ChampionMasteryEndpoint;
 using OpenRiotAPI.Endpoints.LeagueEndpoint;
 using OpenRiotAPI.Endpoints.MatchEndpoint;
 using OpenRiotAPI.Endpoints.SpectatorEndpoint;
 using OpenRiotAPI.Endpoints.SummonerEndpoint;
+using OpenRiotAPI.Extensions;
 
 namespace OpenRiotAPI
 {
@@ -19,6 +22,11 @@ namespace OpenRiotAPI
         public IAccountEndpoint Accounts { get; }
         public IChampionMasteryEndpoint ChampionMastery { get; }
         public ILeagueEndpoint Leagues { get; set; }
+        public IChampionEndpoint Champions { get; set; }
+
+        public RiotClient(IOptions<RiotClientOptions> options) : this(options.Value.ApiKey)
+        {
+        }
 
         public RiotClient(string apiKey)
         {
@@ -33,9 +41,10 @@ namespace OpenRiotAPI
             this.Accounts = new AccountEndpoint(httpClient);
             this.ChampionMastery = new ChampionMasteryEndpoint(httpClient, Summoners);
             this.Leagues = new LeagueEndpoint(httpClient);
+            this.Champions = new ChampionEndpoint(httpClient);
         }
 
-        public RiotClient(HttpClient client)
+        internal RiotClient(HttpClient client)
         {
             this.httpClient = client;
 
@@ -45,6 +54,7 @@ namespace OpenRiotAPI
             this.Accounts = new AccountEndpoint(httpClient);
             this.ChampionMastery = new ChampionMasteryEndpoint(httpClient, Summoners);
             this.Leagues = new LeagueEndpoint(httpClient);
+            this.Champions = new ChampionEndpoint(httpClient);
         }
 
         public void Dispose()
